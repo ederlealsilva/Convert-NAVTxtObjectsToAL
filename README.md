@@ -4,13 +4,11 @@
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 The [Convert-NAVTxtObjectsToAL] allows you with one run doing the following tasks.
-```
 * Export the objects from a database
 * Split all the objects
 * Convert the txt objects to AL
 * Convert the reports RDLC to RDL
 * Create the AL project file structure
-```
 See Usage for additional help.
 
 ---
