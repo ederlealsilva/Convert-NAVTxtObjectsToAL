@@ -9,7 +9,8 @@ The [Convert-NAVTxtObjectsToAL](https://github.com/ederlealsilva/Convert-NAVTxtO
 * Convert the txt objects to AL
 * Convert the reports RDLC to RDL
 * Create the AL project file structure
-<br>See Usage for additional help.
+
+See Usage for additional help.
 
 ---
 
