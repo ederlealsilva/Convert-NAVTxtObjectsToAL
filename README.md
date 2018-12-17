@@ -3,13 +3,13 @@
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-The [Convert-NAVTxtObjectsToAL] allows you with one run doing the following tasks.
+The [Convert-NAVTxtObjectsToAL](https://github.com/ederlealsilva/Convert-NAVTxtObjectsToAL) allows you with one run doing the following tasks.
 * Export the objects from a database
 * Split all the objects
 * Convert the txt objects to AL
 * Convert the reports RDLC to RDL
 * Create the AL project file structure
-See Usage for additional help.
+<br>See Usage for additional help.
 
 ---
 
@@ -27,16 +27,16 @@ This script uses the NAV binary Txt2Al locatated at RoleTailored folder for NAV2
 
 ### Installation
 * Copy the files to your computer
-* Edit the file [Execute.ps1]
-* Change the variables names and set the full path for [Convert-NAVTxtObjectsToAL.psm1]
-* Execute the [Execute.ps1] as Administrator.
+* Edit the file <b>Execute.ps1</b>
+* Change the variables names and set the full path for <b>Convert-NAVTxtObjectsToAL.psm1</b>
+* Execute the <b>Execute.ps1</b> as Administrator.
 
 ---
 
 ## Usage
 * Copy the files to your computer.
-* Change the [Execute.ps1] $variables and set the full path for the module [Convert-NAVTxtObjectsToAL.psm1].
-* Run the [Execute.ps1] as admin.
+* Change the <b>Execute.ps1</b> $variables and set the full path for the module <b>Convert-NAVTxtObjectsToAL.psm1</b>.
+* Run the <b>Execute.ps1</b> as admin.
 
 ---
 
