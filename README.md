@@ -44,5 +44,5 @@ See also the list of [contributors](https://github.com/ederlealsilva/Convert-NAV
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- **[MIT license](https://github.com/ederlealsilva/Convert-NAVTxtObjectsToAL/blob/master/LICENSEp)**
 - Copyright 2018 © <a href="https://github.com/ederlealsilva/" target="_blank">Éder Leal da Silva</a>.
