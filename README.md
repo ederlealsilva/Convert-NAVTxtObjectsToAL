@@ -1,8 +1,8 @@
 # Convert-NAVTxtObjectsToAL
-Convert Microsoft Dynamics NAV Objects To AL Syntax
+[Convert-NAVTxtObjectsToAl](https://github.com/ederlealsilva/Convert-NAVTxtObjectsToAL) uses a powershell script to help you convert Microsoft Dynamics NAV Txt Objects To AL Syntax
 
 ## Getting Started
-<b>Convert-NAVTxtObjectsToAL</B> is powershell scripts that helps you converts the Microsoft Dynamics NAV Objects to AL syntax.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See Usage for additional help.
 
 ---
 
