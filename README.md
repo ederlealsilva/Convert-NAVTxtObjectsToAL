@@ -2,8 +2,7 @@
 [Convert-NAVTxtObjectsToAL](https://github.com/ederlealsilva/Convert-NAVTxtObjectsToAL) uses a powershell script to help you convert Microsoft Dynamics NAV Txt Objects To AL Syntax
 
 ## Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-The [Convert-NAVTxtObjectsToAL](https://github.com/ederlealsilva/Convert-NAVTxtObjectsToAL) allows you with one run doing the following tasks.
+The [Convert-NAVTxtObjectsToAL](https://github.com/ederlealsilva/Convert-NAVTxtObjectsToAL) allows you with a unique execution to perform the following tasks.
 * Export the objects from a database
 * Split all the objects
 * Convert the txt objects to AL
@@ -26,17 +25,9 @@ This script uses the NAV binary Txt2Al locatated at RoleTailored folder for NAV2
 
 ---
 
-### Installation
-* Copy the files to your computer
-* Edit the file <b>Execute.ps1</b>
-* Change the variables names and set the full path for <b>Convert-NAVTxtObjectsToAL.psm1</b>
-* Execute the <b>Execute.ps1</b> as Administrator.
-
----
-
 ## Usage
-* Copy the files to your computer.
-* Change the <b>Execute.ps1</b> $variables and set the full path for the module <b>Convert-NAVTxtObjectsToAL.psm1</b>.
+* Copy the files to your local computer.
+* Change the <b>Execute.ps1</b> $variables to yours setthings and set the full path for the module <b>Convert-NAVTxtObjectsToAL.psm1</b>.
 * Run the <b>Execute.ps1</b> as admin.
 
 ---
