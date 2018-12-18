@@ -17,11 +17,10 @@ See Usage for additional help.
 * Powershell >= 2.0
 * Microsoft Dynamics NAV >= 2018
 * Txt2Al.exe
-```
-This script uses the NAV binary Txt2Al locatated at RoleTailored folder for NAV2018 or BC130
- - C:\Program Files (x86)\Microsoft Dynamics NAV\110\RoleTailored Client\Txt2Al.exe
- - C:\Program Files (x86)\Microsoft Dynamics 365 Business Central\130\RoleTailored Client\Txt2Al.exe
-```
+
+`This script uses the NAV binary Txt2Al locatated at RoleTailored folder for NAV2018 or BC130`
+` - C:\Program Files (x86)\Microsoft Dynamics NAV\110\RoleTailored Client\Txt2Al.exe`
+` - C:\Program Files (x86)\Microsoft Dynamics 365 Business Central\130\RoleTailored Client\Txt2Al.exe`
 
 ---
 
