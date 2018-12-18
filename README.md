@@ -25,10 +25,25 @@ This script uses the NAV binary Txt2Al locatated at RoleTailored folder for NAV2
 
 ---
 
+## Configuration
+Set the full path of the `Convert-NAVTxtObjectsToAL.psm1` file.
+```powershell
+Import-Module 'C:\Temp\Convert-NAVTxtObjectsToAL.psm1'
+```
+
+Edit the $variables in the file `Execute.ps1`.
+```powershell
+$DbServer = "DatabaseServer\DatabaseInstance"
+$DbName = "DatabaseName"
+$Dir = "C:\Temp\ALProject"
+$ObjFilters = "Name=*"
+```
+
+
+---
+
 ## Usage
-* Copy the files to your local computer.
-* Change the <b>Execute.ps1</b> $variables to yours setthings and set the full path for the module <b>Convert-NAVTxtObjectsToAL.psm1</b>.
-* Run the <b>Execute.ps1</b> as admin.
+Run `Execute.ps1` as admin.
 
 ---
 
