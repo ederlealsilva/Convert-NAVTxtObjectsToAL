@@ -80,7 +80,7 @@ function Convert-NavObjectsToNewSyntax () {
     $ProgressDescr = "Progress: Exporting database objects"
     Write-Progress -Activity $ProgressActivity -Status $ProgressDescr -PercentComplete ($ProgCurrTasks/$ProgTotalTasks*100)
 
-    ExportObjects -TxtObjectName $TxtObjFullName -DbServer $DbServer -DbName $DbName
+    ExportObjects -TxtObjectName $TxtObjFullName -DbServer $DbServer -DbName $DbName -ObjectsFilter $ObjectsFilter
     
 
     # Split Txt Objects
