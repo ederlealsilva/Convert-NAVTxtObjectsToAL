@@ -17,4 +17,4 @@ $DbName = "DatabaseName"
 $Dir = "C:\Temp\ALProject"
 $ObjFilters = "Name=*"
 
-Convert-NavObjectsToNewSyntax -DbName $DbServer -DbServer $DbName -NavVersion BC130 -WorkDirectory $Dir -ObjectsFilter $ObjFilters -UpdateFileStructure $true -UpdateReportExtension $true
+Convert-NavObjectsToNewSyntax -DbName $DbName -DbServer $DbServer -NavVersion BC130 -WorkDirectory $Dir -ObjectsFilter $ObjFilters -UpdateFileStructure $true -UpdateReportExtension $true
