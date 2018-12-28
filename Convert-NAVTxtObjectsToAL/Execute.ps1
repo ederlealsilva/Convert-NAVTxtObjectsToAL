@@ -11,17 +11,12 @@
  ** 01   17/12/2018  ENS        Create script
  ** 02   28/12/2018  ENS        Update script
 ============================================================ #>
-Import-Module 'C:\Users\eder.silva\Documents\GitHub\Convert-NAVTxtObjectsToAL\Convert-NAVTxtObjectsToAL\Convert-NAVTxtObjectsToAL.psm1'
+Import-Module 'Convert-NAVTxtObjectsToAL.psm1'
 
 $DbServer = "DatabaseServer\DatabaseInstance"
 $DbName = "DatabaseName"
 $Dir = "C:\Temp\ALProject"
 $ObjFilters = "Name=*"
-
-$DbServer = "ARQUI02-ENS\DBSRV2016"
-$DbName = "DemoDatabaseBC130"
-$Dir = "C:\Temp\ALProject_05"
-$ObjFilters = "Name=*Company*"
 
 
 <#-- FileStructure None --#>
