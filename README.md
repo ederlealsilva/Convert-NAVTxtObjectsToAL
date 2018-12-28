@@ -22,7 +22,6 @@ This script uses the NAV binary Txt2Al locatated at RoleTailored folder for NAV2
  - C:\Program Files (x86)\Microsoft Dynamics NAV\110\RoleTailored Client\Txt2Al.exe
  - C:\Program Files (x86)\Microsoft Dynamics 365 Business Central\130\RoleTailored Client\Txt2Al.exe
 
-
 ---
 
 ## Configuration
@@ -39,11 +38,40 @@ $Dir = "C:\Temp\ALProject"
 $ObjFilters = "Name=*"
 ```
 
+---
+
+## Parameters
+* Mandatory:
+```powershell
+-DbName         # Database Name
+-DbServer       # Database Server (include instance if exist)
+-FileStructure  # Numbered, NameOnly, None
+-NavVersion     # NAV2018, BC130
+-WorkDirectory  # File Directory (directory where the objects will be created)
+```
+
+* Others Paramenters
+```powershell
+-CreateAllStructure     # Create all folder structure even if not all object type were created
+-ObjectsFilter          # Define an object filter ('Version List=*NAVPT*')
+-UpdateReportExtension  # Update report extension (RDLC to RDL)
+```
 
 ---
 
 ## Usage
 Run `Execute.ps1` as admin.
+
+```powershell
+Import-Module 'C:\Temp\Convert-NAVTxtObjectsToAL.psm1'
+
+$DbServer = "DatabaseServer\DatabaseInstance"
+$DbName = "DatabaseName"
+$Dir = "C:\Temp\ALProject"
+$ObjFilters = "Name=*"
+
+Convert-NavObjectsToNewSyntax -DbName $DbName -DbServer $DbServer -FileStructure NameOnly -NavVersion BC130 -WorkDirectory $Dir -CreateAllStructure -ObjectsFilter $ObjFilters -UpdateReportExtension
+```
 
 ---
 
