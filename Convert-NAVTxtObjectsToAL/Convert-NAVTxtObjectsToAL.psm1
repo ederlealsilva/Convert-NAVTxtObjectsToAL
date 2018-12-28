@@ -8,8 +8,9 @@
  **************************
  ** PR  Date	     Author     Description	
  ** --  ----------  ----------  -------------------------------
- ** 01   14/12/2018  ENS        Create funciton
- ** 02   17/12/2018  ENS        Update funciton
+ ** 01   14/12/2018  ENS        Create funcitons
+ ** 02   17/12/2018  ENS        Update funcitons
+ ** 03   28/12/2018  ENS        Introducing Folder Options
 ============================================================ #>
 
 function Convert-NavObjectsToNewSyntax () {
@@ -31,10 +32,14 @@ function Convert-NavObjectsToNewSyntax () {
         [string]$WorkDirectory,
 
         [parameter(Mandatory=$false)]
-        [bool]$UpdateReportExtension,
+        [switch]$UpdateReportExtension,
+
+        [parameter(Mandatory=$true)]
+        [ValidateSet("Numbered","NameOnly","None")]
+        [string]$FileStructure,
 
         [parameter(Mandatory=$false)]
-        [bool]$UpdateFileStructure
+        [switch]$CreateAllStructure
     )
     $startTime = Get-Date
 
@@ -97,7 +102,7 @@ function Convert-NavObjectsToNewSyntax () {
     $ProgressDescr = "Progress: Converting txt objects to al"
     Write-Progress -Activity $ProgressActivity -Status $ProgressDescr -PercentComplete ($ProgCurrTasks/$ProgTotalTasks*100)
 
-    ConvertTxtObjects -Command $Txt2AlCmd -SourceDirectory $TxtObjectCALDir -TargetDirectory $TxtNewSyntaxDir -ErrorAction Continue
+    ConvertTxtObjects -Command $Txt2AlCmd -SourceDirectory $TxtObjectCALDir -TargetDirectory $TxtNewSyntaxDir -ErrorAction SilentlyContinue
 
 
     #Update Reports Extension
@@ -113,11 +118,22 @@ function Convert-NavObjectsToNewSyntax () {
     $ProgCurrTasks = 7
     $ProgressDescr = "Progress: Updating files structures"
     Write-Progress -Activity $ProgressActivity -Status $ProgressDescr -PercentComplete ($ProgCurrTasks/$ProgTotalTasks*100)
-
-    if($UpdateReportExtension) {
-        UpdateFileStructure -DirPath $TxtNewSyntaxDir
+    switch ($FileStructure) {
+        Numbered {
+            if ($CreateAllStructure) {
+                UpdateFileStructure -DirPath $TxtNewSyntaxDir -FileStructure Numbered -CreateAllStructure
+            } else {
+                UpdateFileStructure -DirPath $TxtNewSyntaxDir -FileStructure Numbered
+            }
+        }
+        NameOnly {
+            if ($CreateAllStructure) {
+                UpdateFileStructure -DirPath $TxtNewSyntaxDir -FileStructure NameOnly -CreateAllStructure
+            } else {
+                UpdateFileStructure -DirPath $TxtNewSyntaxDir -FileStructure NameOnly
+            }
+        }
     }
-
 
     #Complete
     $ProgCurrTasks = 8
@@ -163,7 +179,6 @@ function LoadModules () {
 
     }
 }
-
 
 
 <#-- Export objects from the database --#>
@@ -260,12 +275,25 @@ function UpdateReportsExtension() {
 function UpdateFileStructure() {
     param(
         [parameter(Mandatory=$true)]
-        [string]$DirPath
+        [string]$DirPath,
+
+        [parameter(Mandatory=$true)]
+        [ValidateSet("Numbered","NameOnly")]
+        [string]$FileStructure,
+
+        [parameter(Mandatory=$false)]
+        [switch]$CreateAllStructure
     )
+
+    <#-- Project Directory --#>
     $projDir = $DirPath+"\project"
     VerifyDirectory -DirPath $projDir
+    
+    <#-- Application Directory --#>
     $appDir = $projDir+"\app"
     VerifyDirectory -DirPath $appDir
+
+    <#-- System Directories --#>
     VerifyDirectory -DirPath $projDir"\images"
     VerifyDirectory -DirPath $projDir"\logo"
     VerifyDirectory -DirPath $projDir"\permissions"
@@ -274,93 +302,129 @@ function UpdateFileStructure() {
     VerifyDirectory -DirPath $projDir"\translations"
     VerifyDirectory -DirPath $projDir"\webservices"
 
-    $tableDir = $appDir+"\01_table"
-    VerifyDirectory -DirPath $tableDir
-    #$tblCustDir = $appDir+"\01_tableCust"
-    #VerifyDirectory -DirPath $tblCustDir
-    $tblExtDir = $appDir+"\01_tableCust"
-    VerifyDirectory -DirPath $tblExtDir
-    $pageDir = $appDir+"\02_page"
-    VerifyDirectory -DirPath $pageDir
-    #$pgCustDir = $appDir+"\02_pageCust"
-    #VerifyDirectory -DirPath $pgCustDir
-    $pgExtDir = $appDir+"\02_pageExt"
-    VerifyDirectory -DirPath $pgExtDir
-    #$profileDir = $appDir+"\02_profile"
-    #VerifyDirectory -DirPath $profileDir
-    $reportDir = $appDir+"\03_report"
-    VerifyDirectory -DirPath $reportDir
-    #$repCustDir = $appDir+"\03_reportCust"
-    #VerifyDirectory -DirPath $repCustDir
-    $repExtDir = $appDir+"\03_reportExt"
-    VerifyDirectory -DirPath $repExtDir
-    $codeunitDir = $appDir+"\04_codeunit"
-    VerifyDirectory -DirPath $codeunitDir
-    $queryDir = $appDir+"\05_query"
-    VerifyDirectory -DirPath $queryDir
-    $xmlportDir = $appDir+"\06_xmlport"
-    VerifyDirectory -DirPath $xmlportDir
-    $enumDir = $appDir+"\07_enum"
-    VerifyDirectory -DirPath $enumDir
-    $enumExtDir = $appDir+"\07_enumExt"
-    VerifyDirectory -DirPath $enumExtDir
-    $ctrladdinDir = $appDir+"\08_controladdin"
-    VerifyDirectory -DirPath $ctrladdinDir
-    $dotnetDir = $appDir+"\99_dotnet"
-    VerifyDirectory -DirPath $dotnetDir
+    <#-- Objects Directories --#>
+    switch ($FileStructure) {
+        Numbered {
+            $tableDir = $appDir+"\01_table"
+            $tblCustDir = $appDir+"\01_tableCust"
+            $tblExtDir = $appDir+"\01_tableCust"
+            $pageDir = $appDir+"\02_page"
+            $pgCustDir = $appDir+"\02_pageCust"
+            $pgExtDir = $appDir+"\02_pageExt"
+            $profileDir = $appDir+"\02_profile"
+            $reportDir = $appDir+"\03_report"
+            $repCustDir = $appDir+"\03_reportCust"
+            $repExtDir = $appDir+"\03_reportExt"
+            $codeunitDir = $appDir+"\04_codeunit"
+            $queryDir = $appDir+"\05_query"
+            $xmlportDir = $appDir+"\06_xmlport"
+            $enumDir = $appDir+"\07_enum"
+            $enumExtDir = $appDir+"\07_enumExt"
+            $ctrladdinDir = $appDir+"\08_controladdin"
+            $dotnetDir = $appDir+"\99_dotnet"
+        }
 
+        NameOnly {
+            $tableDir = $appDir+"\table"
+            $tblCustDir = $appDir+"\tableCust"
+            $tblExtDir = $appDir+"\tableCust"
+            $pageDir = $appDir+"\page"
+            $pgCustDir = $appDir+"\pageCust"
+            $pgExtDir = $appDir+"\pageExt"
+            $profileDir = $appDir+"\profile"
+            $reportDir = $appDir+"\report"
+            $repCustDir = $appDir+"\reportCust"
+            $repExtDir = $appDir+"\reportExt"
+            $codeunitDir = $appDir+"\codeunit"
+            $queryDir = $appDir+"\query"
+            $xmlportDir = $appDir+"\xmlport"
+            $enumDir = $appDir+"\enum"
+            $enumExtDir = $appDir+"\enumExt"
+            $ctrladdinDir = $appDir+"\controladdin"
+            $dotnetDir = $appDir+"\dotnet"
+        }
+    }
+
+    if($CreateAllStructure) {
+        VerifyDirectory -DirPath $tableDir    
+        VerifyDirectory -DirPath $tblCustDir    
+        VerifyDirectory -DirPath $tblExtDir    
+        VerifyDirectory -DirPath $pageDir
+        VerifyDirectory -DirPath $pgCustDir
+        VerifyDirectory -DirPath $pgExtDir
+        VerifyDirectory -DirPath $profileDir
+        VerifyDirectory -DirPath $reportDir
+        VerifyDirectory -DirPath $repCustDir
+        VerifyDirectory -DirPath $repExtDir
+        VerifyDirectory -DirPath $codeunitDir
+        VerifyDirectory -DirPath $queryDir
+        VerifyDirectory -DirPath $xmlportDir
+        VerifyDirectory -DirPath $enumDir
+        VerifyDirectory -DirPath $enumExtDir
+        VerifyDirectory -DirPath $ctrladdinDir
+        VerifyDirectory -DirPath $dotnetDir
+    }
 
     $i = 0
     Get-ChildItem -Path $DirPath -Recurse | where {$_.extension -eq ".al"} | % {
         # Codeunits
         if ($_.Name.StartsWith("COD")) {
+            if(!$CreateAllStructure) { VerifyDirectory -DirPath $codeunitDir }
             $i ++;
             Move-Item -Path $_.FullName -Destination $codeunitDir -Force
         }
 
         # DotNet
         if ($_.Name.StartsWith("dot")) {
+            if(!$CreateAllStructure) { VerifyDirectory -DirPath $dotnetDir }
             $i ++;
             Move-Item -Path $_.FullName -Destination $dotnetDir -Force
         }
 
         # Pages
         if ($_.Name.StartsWith("PAG")) {
+            if(!$CreateAllStructure) { VerifyDirectory -DirPath $pageDir }
             $i ++;
             Move-Item -Path $_.FullName -Destination $pageDir -Force
         }
 
         # Queries
         if ($_.Name.StartsWith("QUE")) {
+            if(!$CreateAllStructure) { VerifyDirectory -DirPath $queryDir }
             $i ++;
             Move-Item -Path $_.FullName -Destination $queryDir -Force
         }
 
         # Reports
         if ($_.Name.StartsWith("REP")) {
+            if(!$CreateAllStructure) { VerifyDirectory -DirPath $reportDir }
             $i ++;
             Move-Item -Path $_.FullName -Destination $reportDir -Force
         }
 
         # Tables
         if ($_.Name.StartsWith("TAB")) {
+            if(!$CreateAllStructure) { VerifyDirectory -DirPath $tableDir }
             $i ++;
             Move-Item -Path $_.FullName -Destination $tableDir -Force
         }
 
         # XMLports
         if ($_.Name.StartsWith("XML")) {
+            if(!$CreateAllStructure) { VerifyDirectory -DirPath $xmlportDir }
             $i ++;
             Move-Item -Path $_.FullName -Destination $xmlportDir -Force
         }
     }
 
     Get-ChildItem -Path $DirPath -Recurse | where {$_.extension -eq ".rdl" -or $_.extension -eq ".docx"} | % {
+        if(!$CreateAllStructure) { VerifyDirectory -DirPath $reportDir }
         $i ++;
         Move-Item -Path $_.FullName -Destination $reportDir -Force
     }
 
     Get-ChildItem -Path $DirPath -Recurse | where {$_.extension -eq ".xlf"} | % {
+        if(!$CreateAllStructure) { VerifyDirectory -DirPath $projDir }
         $i ++;
         Move-Item -Path $_.FullName -Destination $projDir"\translations" -Force
     }
