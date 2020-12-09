@@ -11,12 +11,13 @@
  ** 01   14/12/2018  ENS        Create funcitons
  ** 02   17/12/2018  ENS        Update funcitons
  ** 03   28/12/2018  ENS        Introducing Folder Options
+ ** 04   09/12/2020  ENS        Including Business Central 14.0
 ============================================================ #>
 
 function Convert-NavObjectsToNewSyntax () {
     param(
         [parameter(Mandatory=$true)]
-        [ValidateSet("NAV2018","BC130")]
+        [ValidateSet("NAV2018","BC130","BC140")]
         [string]$NavVersion,
 
         [parameter(Mandatory=$true)]
@@ -77,6 +78,10 @@ function Convert-NavObjectsToNewSyntax () {
         BC130 {
             $Txt2AlCmd = "C:\Program Files (x86)\Microsoft Dynamics 365 Business Central\130\RoleTailored Client\txt2al.exe"
             LoadModules -NavVersion BC130
+        }
+        BC140 {
+            $Txt2AlCmd = "C:\Program Files (x86)\Microsoft Dynamics 365 Business Central\140\RoleTailored Client\txt2al.exe"
+            LoadModules -NavVersion BC140
         }
     }    
 
@@ -153,7 +158,7 @@ function Convert-NavObjectsToNewSyntax () {
 function LoadModules () {
     param(
         [parameter(Mandatory=$true)]
-        [ValidateSet("NAV2018","BC130")]
+        [ValidateSet("NAV2018","BC130","BC140")]
         [string]$NavVersion
     )
     switch ($NavVersion) {
@@ -175,6 +180,16 @@ function LoadModules () {
             Import-Module 'C:\Program Files (x86)\Microsoft Dynamics 365 Business Central\130\RoleTailored Client\Microsoft.Dynamics.Nav.Model.Tools.psd1' -Force -WarningAction SilentlyContinue | Out-Null
             
             Write-Host -ForegroundColor Yellow ">> BC 130 Modules Loaded"
+        }
+
+        BC140 {
+            # Import the module for the Export-NAVApplicationObject cmdLet
+            Import-Module 'C:\Program Files (x86)\Microsoft Dynamics 365 Business Central\140\RoleTailored Client\Microsoft.Dynamics.Nav.Ide.psm1' -Force -WarningAction SilentlyContinue | Out-Null
+
+            # Import the module for the Split-NAVApplicationObjectFile cmdLet
+            Import-Module 'C:\Program Files (x86)\Microsoft Dynamics 365 Business Central\140\RoleTailored Client\Microsoft.Dynamics.Nav.Model.Tools.psd1' -Force -WarningAction SilentlyContinue | Out-Null
+            
+            Write-Host -ForegroundColor Yellow ">> BC 140 Modules Loaded"
         }
 
     }

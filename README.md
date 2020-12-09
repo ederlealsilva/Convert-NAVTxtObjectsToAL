@@ -18,9 +18,10 @@ See Usage for additional help.
 * Microsoft Dynamics NAV >= 2018
 * Txt2Al.exe
 
-This script uses the NAV binary Txt2Al locatated at RoleTailored folder for NAV2018 or BC130
+This script uses the NAV binary Txt2Al locatated at RoleTailored folder for NAV2018, BC130 and BC140
  - C:\Program Files (x86)\Microsoft Dynamics NAV\110\RoleTailored Client\Txt2Al.exe
  - C:\Program Files (x86)\Microsoft Dynamics 365 Business Central\130\RoleTailored Client\Txt2Al.exe
+ - C:\Program Files (x86)\Microsoft Dynamics 365 Business Central\140\RoleTailored Client\Txt2Al.exe
 
 ---
 
@@ -46,7 +47,7 @@ $ObjFilters = "Name=*"
 -DbName         # Database Name
 -DbServer       # Database Server (include instance if exist)
 -FileStructure  # Numbered, NameOnly, None
--NavVersion     # NAV2018, BC130
+-NavVersion     # NAV2018, BC130, BC140
 -WorkDirectory  # File Directory (directory where the objects will be created)
 ```
 
